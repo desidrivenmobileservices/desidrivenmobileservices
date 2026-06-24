@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desi Driven Mobile Detailing — We Come To You</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --bg:       #05080f;
+    --bg-soft:  #0a0f1c;
+    --card:     #0f1628;
+    --card-2:   #131d34;
+    --line:     #1e2d4a;
+    --text:     #e8eef8;
+    --muted:    #7a8fad;
+    --accent:   #2563eb;
+    --accent-2: #3b82f6;
+    --glow:     rgba(37,99,235,.28);
+    --gold:     #f0c040;
+    --ok:       #34d399;
+    --radius:   14px;
+    --maxw:     1120px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+  .editme { color: var(--gold); font-style: italic; font-size: .85em; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: inherit; font-weight: 700; font-size: .95rem;
+    padding: 13px 24px; border-radius: 999px; border: 0;
+    cursor: pointer; transition: .2s transform, .2s box-shadow;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; box-shadow:0 8px 28px var(--glow); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  .btn-lg { padding: 16px 32px; font-size: 1.05rem; }
+
+  /* NAV */
+  header.nav {
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(5,8,15,.88);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between; height:66px; }
+  .logo { display:flex; align-items:center; gap:11px; font-weight:800; }
+  .logo .mark {
+    width:38px; height:38px; border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),#1d4ed8);
+    display:grid; place-items:center; font-size:1.15rem; color:#fff; font-weight:900;
+  }
+  .logo-text { font-weight:800; font-size:1rem; line-height:1.15; }
+  .logo small { display:block; font-size:.6rem; color:var(--muted); font-weight:600; letter-spacing:1.8px; text-transform:uppercase; }
+  .nav-links { display:flex; gap:22px; align-items:center; }
+  .nav-links a { color:var(--muted); font-weight:600; font-size:.88rem; transition:color .15s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-cta { display:flex; align-items:center; gap:14px; }
+  .nav-phone { font-weight:800; font-size:.95rem; }
+  @media(max-width:860px){ .nav-links,.nav-phone { display:none; } }
+
+  /* STRIPE */
+  .stripe { background:linear-gradient(135deg,var(--accent),#1d4ed8); padding:14px 0; overflow:hidden; }
+  .stripe-inner { display:flex; gap:56px; animation:marquee 20s linear infinite; white-space:nowrap; width:max-content; }
+  .stripe span { font-weight:700; font-size:.85rem; color:#fff; letter-spacing:.3px; }
+  .stripe span::before { content:"✦  "; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* HERO */
+  .hero {
+    position:relative; overflow:hidden; padding:88px 0 74px;
+    background:
+      radial-gradient(ellipse 900px 500px at 80% -5%, rgba(37,99,235,.18), transparent 65%),
+      radial-gradient(ellipse 600px 400px at 5% 110%, rgba(59,130,246,.10), transparent 60%);
+  }
+  .hero::after { content:""; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--accent),transparent); }
+  .hero-inner { display:grid; grid-template-columns:1.2fr .8fr; gap:52px; align-items:center; }
+  .pill {
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--card); border:1px solid var(--line);
+    color:var(--accent-2); padding:7px 16px; border-radius:999px;
+    font-size:.78rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase;
+  }
+  .pill .dot {
+    width:8px; height:8px; border-radius:50%;
+    background:var(--ok); box-shadow:0 0 0 4px rgba(52,211,153,.18);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 4px rgba(52,211,153,.18)} 50%{box-shadow:0 0 0 7px rgba(52,211,153,.06)} }
+  .hero h1 {
+    font-family:'Bebas Neue', sans-serif;
+    font-size:5rem; line-height:.92; letter-spacing:1px;
+    margin:20px 0 18px;
+  }
+  .hero h1 span { color:var(--accent-2); }
+  .hero p.lead { font-size:1.1rem; color:var(--muted); max-width:480px; }
+  .hero-actions { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .hero-stats { display:flex; gap:32px; margin-top:38px; flex-wrap:wrap; }
+  .hero-stats div { font-size:.83rem; color:var(--muted); }
+  .hero-stats b { display:block; font-size:1.55rem; font-weight:800; color:var(--text); line-height:1.1; }
+  .hero-card {
+    background:linear-gradient(160deg,var(--card),var(--card-2));
+    border:1px solid var(--line); border-radius:20px; padding:28px;
+    box-shadow:0 30px 70px rgba(0,0,0,.5), 0 0 0 1px rgba(37,99,235,.1);
+  }
+  .hero-card h3 { font-size:1.08rem; margin-bottom:4px; }
+  .hero-card .sub { color:var(--muted); font-size:.86rem; margin-bottom:18px; }
+  .hfeat { display:flex; gap:13px; padding:13px 0; border-top:1px solid var(--line); }
+  .hfeat .ic { width:40px; height:40px; flex:none; border-radius:10px; background:rgba(37,99,235,.14); display:grid; place-items:center; font-size:1.15rem; }
+  .hfeat b { font-size:.93rem; display:block; }
+  .hfeat span { color:var(--muted); font-size:.82rem; }
+  @media(max-width:860px){ .hero-inner{grid-template-columns:1fr} .hero h1{font-size:3.4rem} .hero-card{display:none} }
+
+  /* SECTION COMMON */
+  section { padding:80px 0; }
+  .sec-head { text-align:center; max-width:640px; margin:0 auto 52px; }
+  .sec-head .tag { color:var(--accent-2); font-weight:700; font-size:.73rem; letter-spacing:2.5px; text-transform:uppercase; }
+  .sec-head h2 { font-family:'Bebas Neue',sans-serif; font-size:3rem; letter-spacing:.5px; margin:10px 0 12px; line-height:1; }
+  .sec-head p { color:var(--muted); font-size:.98rem; }
+
+  /* SERVICES */
+  #services { background:var(--bg-soft); }
+  .services-tabs { display:flex; gap:10px; justify-content:center; margin-bottom:38px; flex-wrap:wrap; }
+  .tab-btn {
+    padding:10px 22px; border-radius:999px; border:1px solid var(--line);
+    background:var(--card); color:var(--muted); font-weight:600; font-size:.88rem;
+    cursor:pointer; transition:.2s; font-family:inherit;
+  }
+  .tab-btn.active,.tab-btn:hover { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .svc { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px; transition:.2s; }
+  .svc:hover { border-color:var(--accent-2); transform:translateY(-4px); }
+  .svc .ic { font-size:1.9rem; margin-bottom:14px; }
+  .svc h3 { font-size:1.08rem; margin-bottom:8px; }
+  .svc p { color:var(--muted); font-size:.9rem; }
+  .svc ul { margin-top:12px; list-style:none; }
+  .svc ul li { color:var(--muted); font-size:.85rem; padding:4px 0; display:flex; gap:8px; }
+  .svc ul li::before { content:"✓"; color:var(--ok); font-weight:700; flex:none; }
+  @media(max-width:860px){ .services-grid{grid-template-columns:1fr} }
+
+  /* PACKAGES */
+  #packages { background:var(--bg); }
+  .pkg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .pkg { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:30px; display:flex; flex-direction:column; position:relative; }
+  .pkg.featured { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent),0 20px 50px rgba(37,99,235,.2); }
+  .pkg .badge { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; font-weight:800; font-size:.7rem; padding:5px 14px; border-radius:999px; letter-spacing:.5px; white-space:nowrap; }
+  .pkg-icon { font-size:2.1rem; margin-bottom:12px; }
+  .pkg h3 { font-size:1.18rem; font-weight:800; }
+  .pkg .amount { font-size:2.4rem; font-weight:800; margin:10px 0 4px; }
+  .pkg .amount small { font-size:.9rem; color:var(--muted); font-weight:500; }
+  .pkg .desc { color:var(--muted); font-size:.87rem; margin-bottom:18px; }
+  .pkg ul { list-style:none; flex:1; margin-bottom:22px; }
+  .pkg li { padding:7px 0; font-size:.9rem; display:flex; gap:10px; border-bottom:1px solid var(--line); }
+  .pkg li::before { content:"✓"; color:var(--ok); font-weight:800; }
+  .pkg .btn { width:100%; justify-content:center; }
+  @media(max-width:860px){ .pkg-grid{grid-template-columns:1fr} }
+
+  /* SUBSCRIPTIONS */
+  #subscriptions { background:var(--bg-soft); }
+  .sub-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .sub-card { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:28px; display:flex; flex-direction:column; position:relative; }
+  .sub-card.featured { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent),0 20px 50px rgba(37,99,235,.2); }
+  .sub-card .badge { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; font-weight:800; font-size:.7rem; padding:5px 14px; border-radius:999px; letter-spacing:.5px; white-space:nowrap; }
+  .freq { color:var(--accent-2); font-size:.75rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; }
+  .sub-card h3 { font-size:1.12rem; font-weight:800; }
+  .sub-card .amount { font-size:2.2rem; font-weight:800; margin:10px 0 4px; }
+  .sub-card .amount small { font-size:.88rem; color:var(--muted); }
+  .sub-card .desc { color:var(--muted); font-size:.86rem; margin-bottom:16px; }
+  .sub-card ul { list-style:none; flex:1; margin-bottom:20px; }
+  .sub-card li { padding:7px 0; font-size:.88rem; display:flex; gap:10px; border-bottom:1px solid var(--line); }
+  .sub-card li::before { content:"✓"; color:var(--ok); font-weight:800; }
+  .sub-card .btn { width:100%; justify-content:center; }
+  .sub-note { text-align:center; color:var(--muted); font-size:.83rem; margin-top:22px; }
+  @media(max-width:860px){ .sub-grid{grid-template-columns:1fr} }
+
+  /* DEALS */
+  #deals { background:var(--bg); }
+  .deals-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .deal { border-radius:var(--radius); padding:26px; border:1px dashed var(--accent); background:linear-gradient(160deg,rgba(37,99,235,.10),rgba(59,130,246,.04)); }
+  .deal .save { font-weight:800; color:var(--gold); font-size:.82rem; letter-spacing:1px; }
+  .deal h3 { font-size:1.18rem; margin:8px 0; }
+  .deal p { color:var(--muted); font-size:.9rem; }
+  .deal .code { display:inline-block; margin-top:14px; background:var(--bg); border:1px dashed var(--line); padding:6px 14px; border-radius:8px; font-weight:800; letter-spacing:2px; color:var(--text); }
+  @media(max-width:860px){ .deals-grid{grid-template-columns:1fr} }
+
+  /* REVIEWS */
+  #reviews { background:var(--bg-soft); }
+  .rating-summary { text-align:center; margin-bottom:44px; }
+  .rating-summary .big { font-size:3.2rem; font-weight:800; }
+  .stars { color:var(--gold); letter-spacing:3px; }
+  .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .review { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; }
+  .review .stars { font-size:1rem; margin-bottom:12px; display:block; }
+  .review p { font-size:.92rem; margin-bottom:18px; line-height:1.65; }
+  .reviewer { display:flex; align-items:center; gap:12px; }
+  .reviewer .av { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--accent),#1d4ed8); display:grid; place-items:center; font-weight:800; color:#fff; font-size:.88rem; flex:none; }
+  .reviewer b { font-size:.9rem; }
+  .reviewer span { display:block; color:var(--muted); font-size:.78rem; }
+  @media(max-width:860px){ .reviews-grid{grid-template-columns:1fr} }
+
+  /* SOCIALS */
+  #socials { background:var(--bg); }
+  .socials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .social-card { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; text-align:center; transition:border-color .2s,transform .2s; }
+  .social-card:hover { transform:translateY(-4px); }
+  .social-card.ig:hover { border-color:#e1306c; }
+  .social-card.tt:hover { border-color:#69c9d0; }
+  .social-card.yt:hover { border-color:#ff0000; }
+  .social-icon { font-size:2.5rem; margin-bottom:12px; }
+  .social-card h3 { font-size:1.08rem; font-weight:800; margin-bottom:6px; }
+  .social-card p { color:var(--muted); font-size:.86rem; margin-bottom:10px; }
+  .social-card .handle { color:var(--accent-2); font-weight:700; font-size:.88rem; margin-bottom:18px; display:block; }
+  .social-card .btn { width:100%; justify-content:center; }
+  .social-card.ig .btn { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; border:0; }
+  .social-card.tt .btn { background:#010101; color:#fff; border:1px solid #333; }
+  .social-card.yt .btn { background:#ff0000; color:#fff; border:0; }
+  @media(max-width:860px){ .socials-grid{grid-template-columns:1fr} }
+
+  /* CONTACT */
+  #contact { background:var(--bg-soft); }
+  .contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:start; }
+  .contact-left .tag { color:var(--accent-2); font-weight:700; font-size:.73rem; letter-spacing:2.5px; text-transform:uppercase; display:block; margin-bottom:10px; }
+  .contact-left h2 { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; letter-spacing:.5px; line-height:1; margin-bottom:14px; }
+  .contact-left .intro { color:var(--muted); font-size:.98rem; margin-bottom:24px; }
+  .info-row { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); }
+  .info-row .ic { font-size:1.3rem; flex:none; padding-top:2px; }
+  .info-row b { display:block; font-size:.93rem; }
+  .info-row span { color:var(--muted); font-size:.86rem; }
+  .contact-card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:32px; box-shadow:0 20px 50px rgba(0,0,0,.3); }
+  .call-box { text-align:center; margin-bottom:20px; }
+  .call-box .label { color:var(--muted); font-size:.8rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .call-box .num { font-size:2rem; font-weight:800; color:var(--accent-2); margin-bottom:16px; }
+  .divider { text-align:center; color:var(--muted); font-size:.8rem; margin:16px 0; }
+  .email-box { text-align:center; }
+  .email-box p { color:var(--muted); font-size:.84rem; margin-bottom:8px; }
+  .email-box a { color:var(--accent-2); font-weight:700; font-size:.9rem; word-break:break-all; }
+  @media(max-width:860px){ .contact-inner{grid-template-columns:1fr} }
+
+  /* FOOTER */
+  footer { background:var(--bg); border-top:1px solid var(--line); padding:26px 0; }
+  .foot-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .foot-inner p { color:var(--muted); font-size:.84rem; }
+  .foot-links { display:flex; gap:20px; }
+  .foot-links a { color:var(--muted); font-size:.84rem; font-weight:600; }
+  .foot-links a:hover { color:var(--text); }
+
+  /* FLOAT */
+  .float-call { position:fixed; bottom:22px; right:22px; z-index:200; display:none; }
+  @media(max-width:860px){ .float-call{display:block} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <div class="logo">
+      <div class="mark">D</div>
+      <div class="logo-text">Desi Driven<small>Mobile Detailing</small></div>
+    </div>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#packages">Packages</a>
+      <a href="#subscriptions">Subscriptions</a>
+      <a href="#deals">Deals</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#socials">Follow Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="nav-phone">📞 (516) 800-7223</span>
+      <a href="tel:+15168007223" class="btn btn-primary">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="stripe">
+  <div class="stripe-inner">
+    <span>Interior Detailing</span><span>Exterior Detailing</span><span>Full Detail Packages</span>
+    <span>Monthly Wash Plans</span><span>We Come To You</span><span>Ceramic Coating</span>
+    <span>Paint Correction</span><span>Odour Elimination</span>
+    <span>Interior Detailing</span><span>Exterior Detailing</span><span>Full Detail Packages</span>
+    <span>Monthly Wash Plans</span><span>We Come To You</span><span>Ceramic Coating</span>
+    <span>Paint Correction</span><span>Odour Elimination</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="pill"><span class="dot"></span> Now Booking — We Come To You</div>
+      <h1>Your Car.<br><span>Showroom</span><br>Clean.</h1>
+      <p class="lead">Professional mobile detailing at your home or workplace. Interior, exterior, full packages — no garage visit needed.</p>
+      <div class="hero-actions">
+        <a href="tel:+15168007223" class="btn btn-primary btn-lg">📞 Book Now</a>
+        <a href="#packages" class="btn btn-ghost btn-lg">View Packages</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>500+</b> Cars Detailed</div>
+        <div><b>4.9★</b> Customer Rating</div>
+        <div><b>Same Day</b> Availability</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Why mobile detailing?</h3>
+      <p class="sub">We bring the studio to your driveway.</p>
+      <div class="hfeat"><div class="ic">🏠</div><div><b>At your location</b><span>Home, office or anywhere convenient</span></div></div>
+      <div class="hfeat"><div class="ic">⏱️</div><div><b>Save your time</b><span>No drop-offs, no waiting rooms</span></div></div>
+      <div class="hfeat"><div class="ic">💎</div><div><b>Pro-grade results</b><span>Same tools as top detailing studios</span></div></div>
+      <div class="hfeat"><div class="ic">📅</div><div><b>Flexible booking</b><span>Weekdays, weekends & evenings</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">What We Do</span>
+      <h2>Our Services</h2>
+      <p>Every service performed on-location with professional-grade equipment and products.</p>
+    </div>
+    <div class="services-tabs">
+      <button class="tab-btn active" onclick="filterSvc(this,'all')">All Services</button>
+      <button class="tab-btn" onclick="filterSvc(this,'interior')">Interior</button>
+      <button class="tab-btn" onclick="filterSvc(this,'exterior')">Exterior</button>
+    </div>
+    <div class="services-grid">
+      <div class="svc" data-cat="interior">
+        <div class="ic">🪑</div><h3>Interior Deep Clean</h3>
+        <p>Full interior vacuum, wipe-down and sanitisation leaving your cabin fresh and spotless.</p>
+        <ul><li>Vacuum seats, floor & boot</li><li>Dashboard & console wipe</li><li>Door panels & windows</li><li>Air freshener finish</li></ul>
+      </div>
+      <div class="svc" data-cat="interior">
+        <div class="ic">🧽</div><h3>Upholstery & Carpet Shampoo</h3>
+        <p>Hot-water extraction and shampoo for seats, carpets and mats — tackles stains and odours.</p>
+        <ul><li>Fabric or leather treatment</li><li>Steam extraction</li><li>Stain & odour removal</li></ul>
+      </div>
+      <div class="svc" data-cat="interior">
+        <div class="ic">✨</div><h3>Odour Elimination</h3>
+        <p>Ozone or bomb-based odour neutralisation for smoke, pets, food and more.</p>
+        <ul><li>Ozone treatment available</li><li>Pet odour specialists</li><li>Smoke removal</li></ul>
+      </div>
+      <div class="svc" data-cat="exterior">
+        <div class="ic">🚿</div><h3>Exterior Hand Wash & Dry</h3>
+        <p>Two-bucket method hand wash and streak-free dry for a showroom finish.</p>
+        <ul><li>Two-bucket method</li><li>Wheel & tyre clean</li><li>Streak-free hand dry</li></ul>
+      </div>
+      <div class="svc" data-cat="exterior">
+        <div class="ic">🔵</div><h3>Ceramic Coating</h3>
+        <p>Long-lasting nano-ceramic protection that repels water, dirt and UV for years.</p>
+        <ul><li>Paint decontamination prep</li><li>1–5 year protection options</li><li>Hydrophobic finish</li></ul>
+      </div>
+      <div class="svc" data-cat="exterior">
+        <div class="ic">🪄</div><h3>Paint Correction</h3>
+        <p>Machine polishing to remove swirl marks, scratches and oxidisation.</p>
+        <ul><li>Single or multi-stage</li><li>Swirl & scratch removal</li><li>Pre-coating preparation</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Packages</span>
+      <h2>Detail Packages</h2>
+      <p>Bundled services at a better price. Pick the package that fits your car and budget.</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg">
+        <div class="pkg-icon">🥈</div>
+        <h3>Essential Detail</h3>
+        <div class="amount"><span class="editme">$XX</span><small>/one-time</small></div>
+        <div class="desc">Perfect for a regular maintenance clean.</div>
+        <ul>
+          <li>Exterior hand wash & dry</li>
+          <li>Wheel & tyre clean</li>
+          <li>Interior vacuum</li>
+          <li>Dashboard & console wipe</li>
+          <li>Windows inside & out</li>
+        </ul>
+        <a href="tel:+15168007223" class="btn btn-ghost">Book This</a>
+      </div>
+      <div class="pkg featured">
+        <span class="badge">⭐ MOST POPULAR</span>
+        <div class="pkg-icon">🥇</div>
+        <h3>Full Detail</h3>
+        <div class="amount"><span class="editme">$XX</span><small>/one-time</small></div>
+        <div class="desc">Complete inside-and-out transformation.</div>
+        <ul>
+          <li>Everything in Essential, plus:</li>
+          <li>Interior shampoo & extraction</li>
+          <li>Leather / fabric conditioning</li>
+          <li>Clay bar paint decontam.</li>
+          <li>Tyre dressing & trim restore</li>
+          <li>Air freshener finish</li>
+        </ul>
+        <a href="tel:+15168007223" class="btn btn-primary">Book This</a>
+      </div>
+      <div class="pkg">
+        <div class="pkg-icon">💎</div>
+        <h3>Premium Ceramic</h3>
+        <div class="amount"><span class="editme">$XX</span><small>/one-time</small></div>
+        <div class="desc">Ultimate protection for serious car owners.</div>
+        <ul>
+          <li>Everything in Full Detail, plus:</li>
+          <li>Paint correction polish</li>
+          <li>Ceramic coating applied</li>
+          <li>1-year protection guarantee</li>
+          <li>Aftercare kit included</li>
+        </ul>
+        <a href="tel:+15168007223" class="btn btn-ghost">Book This</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIPTIONS -->
+<section id="subscriptions">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Monthly Plans</span>
+      <h2>Wash Subscriptions</h2>
+      <p>Keep your car looking its best every month. Subscribe and save — cancel anytime.</p>
+    </div>
+    <div class="sub-grid">
+      <div class="sub-card">
+        <div class="freq">Monthly</div>
+        <h3>Basic Wash Plan</h3>
+        <div class="amount"><span class="editme">$XX</span><small>/mo</small></div>
+        <div class="desc">Regular upkeep to keep your car clean and protected.</div>
+        <ul>
+          <li>1x exterior wash/month</li>
+          <li>Wheel & tyre clean</li>
+          <li>Interior quick vacuum</li>
+          <li>Window wipe-down</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="tel:+15168007223" class="btn btn-ghost">Subscribe</a>
+      </div>
+      <div class="sub-card featured">
+        <span class="badge">BEST VALUE</span>
+        <div class="freq">Monthly</div>
+        <h3>Bi-Weekly Plan</h3>
+        <div class="amount"><span class="editme">$XX</span><small>/mo</small></div>
+        <div class="desc">Two washes a month — always showroom ready.</div>
+        <ul>
+          <li>2x exterior washes/month</li>
+          <li>Interior vacuum each visit</li>
+          <li>Tyre dressing included</li>
+          <li>Dashboard wipe each visit</li>
+          <li>Priority booking slots</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="tel:+15168007223" class="btn btn-primary">Subscribe</a>
+      </div>
+      <div class="sub-card">
+        <div class="freq">Monthly</div>
+        <h3>Premium Plan</h3>
+        <div class="amount"><span class="editme">$XX</span><small>/mo</small></div>
+        <div class="desc">Weekly visits plus a monthly full interior detail.</div>
+        <ul>
+          <li>4x exterior washes/month</li>
+          <li>1x full interior detail/mo</li>
+          <li>Ceramic top-up spray</li>
+          <li>Priority same-day booking</li>
+          <li>Dedicated detail specialist</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="tel:+15168007223" class="btn btn-ghost">Subscribe</a>
+      </div>
+    </div>
+    <p class="sub-note">All plans are month-to-month. No contracts. Cancel anytime. <span class="editme">[Update prices before publishing]</span></p>
+  </div>
+</section>
+
+<!-- DEALS -->
+<section id="deals">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Special Offers</span>
+      <h2>Current Deals</h2>
+      <p>Limited-time offers — mention the code when you call to book.</p>
+    </div>
+    <div class="deals-grid">
+      <div class="deal">
+        <div class="save">SAVE 15%</div>
+        <h3>First-Time Customer</h3>
+        <p>15% off your first detail package. Any size vehicle, any package.</p>
+        <span class="code">DESI15</span>
+      </div>
+      <div class="deal">
+        <div class="save">FREE UPGRADE</div>
+        <h3>Sub Starter Deal</h3>
+        <p>Sign up for any monthly plan and get your first month upgraded to the next tier free.</p>
+        <span class="code">SUBSTART</span>
+      </div>
+      <div class="deal">
+        <div class="save">$20 OFF EACH</div>
+        <h3>Refer a Friend</h3>
+        <p>You and your friend each get $20 off when they book using your name.</p>
+        <span class="code">REFER20</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Customer Reviews</span>
+      <h2>What Clients Say</h2>
+    </div>
+    <div class="rating-summary">
+      <div class="big">4.9 <span style="color:var(--gold)">★</span></div>
+      <div class="stars">★★★★★</div>
+      <p style="color:var(--muted);margin-top:6px">Based on <b>120+</b> happy customers</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review">
+        <span class="stars">★★★★★</span>
+        <p>"Absolutely unbelievable work. My car looked better than the day I bought it. Came to my driveway and I didn't have to lift a finger."</p>
+        <div class="reviewer"><div class="av">AK</div><div><b>Amir K.</b><span>Full Detail Package</span></div></div>
+      </div>
+      <div class="review">
+        <span class="stars">★★★★★</span>
+        <p>"Been on the bi-weekly subscription for 3 months and my car has never looked this clean consistently. Worth every penny."</p>
+        <div class="reviewer"><div class="av">SR</div><div><b>Sarah R.</b><span>Bi-Weekly Subscription</span></div></div>
+      </div>
+      <div class="review">
+        <span class="stars">★★★★★</span>
+        <p>"Got the ceramic coating done and the results blew my mind. Water just beads right off. Professional service at my home."</p>
+        <div class="reviewer"><div class="av">JM</div><div><b>James M.</b><span>Premium Ceramic Package</span></div></div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:.83rem;margin-top:22px"><span class="editme">[Replace with your real customer reviews]</span></p>
+  </div>
+</section>
+
+<!-- SOCIALS -->
+<section id="socials">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Follow Along</span>
+      <h2>See Our Work</h2>
+      <p>Before & afters, transformations and behind-the-scenes — follow us on social media.</p>
+    </div>
+    <div class="socials-grid">
+      <div class="social-card ig">
+        <div class="social-icon">📸</div>
+        <h3>Instagram</h3>
+        <p>Before & afters, reels and daily content from the field.</p>
+        <span class="handle">@desidrivenmobileservices</span>
+        <a href="https://www.instagram.com/desidrivenmobileservices/" target="_blank" rel="noopener" class="btn">Follow on Instagram</a>
+      </div>
+      <div class="social-card tt">
+        <div class="social-icon">🎵</div>
+        <h3>TikTok</h3>
+        <p>Satisfying detail transformations and quick car care tips.</p>
+        <span class="handle">@desidrivenmobileservices</span>
+        <a href="https://www.tiktok.com/@desidrivenmobileservices" target="_blank" rel="noopener" class="btn">Follow on TikTok</a>
+      </div>
+      <div class="social-card yt">
+        <div class="social-icon">▶️</div>
+        <h3>YouTube</h3>
+        <p>Full detail walkthroughs, tutorials and car care guides.</p>
+        <span class="handle">@DesiDrivenMobileServices</span>
+        <a href="https://www.youtube.com/@DesiDrivenMobileServices" target="_blank" rel="noopener" class="btn">Subscribe on YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact-inner">
+    <div class="contact-left">
+      <span class="tag">Get In Touch</span>
+      <h2>Book Your Detail Today</h2>
+      <p class="intro">Call or email us for a free quote and to book your slot — often same or next day.</p>
+      <div class="info-row"><span class="ic">📞</span><div><b>Phone</b><span>(516) 800-7223</span></div></div>
+      <div class="info-row"><span class="ic">✉️</span><div><b>Email</b><span>desidrivenautomotiveservices@gmail.com</span></div></div>
+      <div class="info-row"><span class="ic">🕒</span><div><b>Hours</b><span>Mon–Sat: 8am – 7pm · Sun: by appointment</span></div></div>
+      <div class="info-row"><span class="ic">📍</span><div><b>Coverage Area</b><span class="editme">[Add your service area here]</span></div></div>
+    </div>
+    <div class="contact-card">
+      <div class="call-box">
+        <div class="label">Call to book</div>
+        <div class="num">(516) 800-7223</div>
+        <a href="tel:+15168007223" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">📞 Call Now</a>
+      </div>
+      <div class="divider">— or —</div>
+      <div class="email-box">
+        <p>Prefer email? We reply within a few hours.</p>
+        <a href="mailto:desidrivenautomotiveservices@gmail.com">desidrivenautomotiveservices@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-inner">
+    <p>© <span id="yr"></span> Desi Driven Mobile Detailing · Professional mobile automotive detailing</p>
+    <div class="foot-links">
+      <a href="https://www.instagram.com/desidrivenmobileservices/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@desidrivenmobileservices" target="_blank">TikTok</a>
+      <a href="https://www.youtube.com/@DesiDrivenMobileServices" target="_blank">YouTube</a>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<div class="float-call">
+  <a href="tel:+15168007223" class="btn btn-primary">📞 Call to Book</a>
+</div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  function filterSvc(btn, cat) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.svc').forEach(c => {
+      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
